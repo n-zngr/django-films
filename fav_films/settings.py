@@ -27,6 +27,9 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+STATIC_URL = 'static/'
+LOGIN_REDIRECT_URL = 'films:index'
+
 
 # Application definition
 

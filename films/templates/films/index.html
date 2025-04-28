@@ -8,8 +8,24 @@
     <link rel="stylesheet" href="{% static 'films/style.css' %}">
 </head>
 <body>
+    <nav class="nav">
+        <li class="nav-item">
+            {% if user.is_authenticated %}
+                <form action="{% url 'logout' %}" method="post">
+                {% csrf_token %}
+                <button type="submit">Logout</button>
+                </form>
+            {% else %}
+                <a href="{% url 'login' %}">Login</a>
+            {% endif %}
+        </li>
+        <li class="nav-item">
+            <a class="nav-link " href="{% url 'films:new_film' %}">Film +</a>
+        </li>
+    </nav>
+    
     <h1>Filmlist Template</h1>
-    <a class="nav-link " href="{% url 'films:new_film' %}">Film +</a>
+
     {% for film in film_list %}
 
     <ul>
