@@ -12,8 +12,8 @@
         <li class="nav-item">
             {% if user.is_authenticated %}
                 <form action="{% url 'logout' %}" method="post">
-                {% csrf_token %}
-                <button type="submit">Logout</button>
+                    {% csrf_token %}
+                    <button type="submit">Logout</button>
                 </form>
             {% else %}
                 <a href="{% url 'login' %}">Login</a>
@@ -23,7 +23,7 @@
             <a class="nav-link " href="{% url 'films:new_film' %}">Film +</a>
         </li>
     </nav>
-    
+
     <h1>Filmlist Template</h1>
 
     {% for film in film_list %}
