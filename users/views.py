@@ -4,14 +4,15 @@ from users.forms import RegisterForm
 from django.contrib.auth.forms import UserCreationForm
 
 def register(request):
-    if request.method =='POST':
+    if request.method == 'POST':
         form = RegisterForm(request.POST)
         if form.is_valid():
-            username = form.cleaned_data.get('username')
-            messages.success(request, f'Willkommen {username}! Du bist nun eingeloggt.')
-            form.save()
+            user = form.save(commit=False)
+            user.email = form.cleaned_data.get('email')
+            user.save()
+            messages.success(request, f'Willkommen {user.username}! Du bist nun eingeloggt.')
             return redirect('login')
     else:
-        form = UserCreationForm()
+        form = RegisterForm()
 
-    return render(request, 'users/register.html',{'form':form})
+    return render(request, 'users/register.html', {'form': form})
